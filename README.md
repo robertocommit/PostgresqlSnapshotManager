@@ -33,3 +33,23 @@ CREATE TABLE cron_job_log (
     error_traceback TEXT,
     execution_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+```
+
+## Load the .dump file on a local postresql instance
+
+Make sure to run an appropriate versione of Postgresql
+
+```
+scp root@SERVER_HOST:/root/FILE_LOCATION/FILENAME.dump .
+docker pull postgres:16
+docker cp FILENAME.dump mypostgres16:/    
+docker exec -it mypostgres16 psql -U postgres -c "CREATE DATABASE YOUR_DB_NAME;"
+docker exec -it mypostgres16 pg_restore -U postgres -d YOUR_DB_NAME /FILENAME.dump     
+docker exec -it mypostgres16 psql -U postgres -d YOUR_DB_NAME
+```
+
+Finally once inside the database, list all the tables available
+
+```
+\dt
+```
