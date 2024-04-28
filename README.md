@@ -35,9 +35,13 @@ CREATE TABLE cron_job_log (
 );
 ```
 
-## Load the .dump file on a local postresql instance
+## Load the .dump file on a local Postgresql instance
 
-Make sure to run an appropriate versione of Postgresql
+The easiest way to do it is using Docker.
+
+It is important to make sure that the docker version pulled is the same as the one where the dump file is coming from.
+
+In the example below Postgresql:16 is used.
 
 ```
 scp root@SERVER_HOST:/root/FILE_LOCATION/FILENAME.dump .
@@ -48,7 +52,7 @@ docker exec -it mypostgres16 pg_restore -U postgres -d YOUR_DB_NAME /FILENAME.du
 docker exec -it mypostgres16 psql -U postgres -d YOUR_DB_NAME
 ```
 
-Finally once inside the database, list all the tables available
+Finally once inside the database, list all the tables available.
 
 ```
 \dt
