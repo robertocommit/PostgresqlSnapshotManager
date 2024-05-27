@@ -1,6 +1,6 @@
 # PostgreSQL Snapshot Manager
 
-This tool automates the process of creating and managing PostgreSQL database backups. It features automated dump file creation, backup retention, activity logging, and email notifications on failure.
+This tool automates the process of creating and managing PostgreSQL database backups. It features automated dump file creation, backup retention, activity logging, email notifications on failure, and automatic upload of backups to AWS S3 for off-site storage.
 
 ## Prerequisites
 
@@ -8,6 +8,7 @@ This tool automates the process of creating and managing PostgreSQL database bac
 - Python 3
 - `psycopg2` and `yagmail` libraries
 - Access to a SMTP server (for sending emails)
+- Access to an AWS account with an S3 bucket configured
 
 ## Environment Variables
 
@@ -20,6 +21,10 @@ Set the following environment variables before running the tool:
 - `DB_PORT`: Port on which the database server is listening.
 - `GMAIL`: Gmail address to use for sending notification emails.
 - `GMAILPW`: Password for the Gmail account.
+- `AWS_BUCKET_NAME`: The name of the AWS S3 bucket where the dumps will be uploaded.
+- `AWS_ACCESS_KEY_ID`: Your AWS access key.
+- `AWS_SECRET_ACCESS_KEY`: Your AWS secret key.
+- `AWS_DEFAULT_REGION`: The AWS region your S3 bucket is in.
 
 ## Database Log Table
 
@@ -34,6 +39,10 @@ CREATE TABLE cron_job_log (
     execution_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 ```
+
+## Uploading Backups to AWS S3
+
+After creating a database dump, the tool will automatically upload it to the specified AWS S3 bucket. This ensures that backups are securely stored off-site and are accessible for disaster recovery purposes.
 
 ## Load the .dump file on a local Postgresql instance
 
