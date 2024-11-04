@@ -44,7 +44,7 @@ CREATE TABLE cron_job_log (
 
 After creating a database dump, the tool will automatically upload it to the specified AWS S3 bucket. This ensures that backups are securely stored off-site and are accessible for disaster recovery purposes.
 
-## Load the .dump file on a local Postgresql instance
+## (OPTIONA) Load the .dump backup file on a local Postgresql instance
 
 The easiest way to do it is using Docker.
 
